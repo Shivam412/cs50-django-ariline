@@ -4,6 +4,8 @@ from django.db.models import Max
 from .models import Airport, Flight
 
 # Create your tests here.
+
+
 class ModelTestCase(TestCase):
 
     def setUp(self):
@@ -21,7 +23,7 @@ class ModelTestCase(TestCase):
         ''' test departures count '''
         a = Airport.objects.get(code="AAA")
         self.assertEqual(a.departures.count(), 3)
-    
+
     def test_arrivals_count(self):
         ''' test arrivals count '''
         a = Airport.objects.get(code="AAA")
@@ -51,13 +53,12 @@ class ModelTestCase(TestCase):
         ''' test validity of flight page '''
         a1 = Airport.objects.get(code="AAA")
         f = Flight.objects.get(origin=a1, destination=a1)
-        
         c = Client()
         response = c.get(f"/{f.id}")
         self.assertEqual(response.status_code, 200)
-    
+
     def test_invalid_flight_page(self):
-        ''' test invalidity of flight page ''' 
+        ''' test invalidity of flight page '''
         max_id = Flight.objects.all().aggregate(Max("id"))["id__max"]
 
         c = Client()
