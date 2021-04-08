@@ -1,1 +1,40 @@
+name: Django Tests
 
+on:
+  push:
+    branches:
+      - master
+    
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    step:
+    - uses: actions/checkout@v2
+    - name: Set Up Python 3.7
+      uses: actions/setup-python@v2
+    with:
+      python-version: 3.7
+    - name: Install dependencies
+    run: |
+      python3 -m pip install --upgrade pip
+      pip install -r requirements.txt
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8
+    - name: Coverage report
+      run: |
+        pip install flake8
+        coverage run manage.py test
+        coverage report
+    - name: Django Testing
+      run: |
+        python3 manage.py test
+     
+   
