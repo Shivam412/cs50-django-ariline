@@ -28,7 +28,6 @@ jobs:
         pip install -r requirements.txt
 
     - name: Coverage report
-      uses: secrethub/actions/env-export@v0.2.1
       env:
         SECRET_KEY: ${{ secrets.AIRLINE_DJANGO_SECRET }}
       run: |
