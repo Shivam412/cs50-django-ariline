@@ -15,9 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - env:
-      SECRET_KEY: ${{ secrets.AIRLINE_DJANGO_SECRET }}
     - uses: actions/checkout@v2
+    - uses: secrethub/actions/env-export@v0.2.1
+      env:
+        SECRET_KEY: ${{ secrets.AIRLINE_DJANGO_SECRET }}
     - name: Set up Python 3.7
       uses: actions/setup-python@v2
       with:
@@ -37,4 +38,4 @@ jobs:
         coverage report
     - name: Django Testing
       run: |
-        python3 manage.py test
+        python3 manage.py test     
