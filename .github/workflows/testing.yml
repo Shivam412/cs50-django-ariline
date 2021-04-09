@@ -27,6 +27,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Lint with flake8
+      run: |
+         pip install flake8
+         flake8
+
     - name: Coverage report
       env:
         SECRET_KEY: ${{ secrets.AIRLINE_DJANGO_SECRET }}
